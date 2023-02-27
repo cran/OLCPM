@@ -1,0 +1,10 @@
+70cf4bf693641fb4631130e00c8dcb93 *DESCRIPTION
+2ceb6111c9b3a67e3692f405b9f94ddc *NAMESPACE
+e25b5fd2e1e9f7456544a812baa9c3c8 *R/function.R
+e7bed737975f65c6f71230bf50dbc8d3 *man/gen.data.Rd
+a00e5d34dce55f996801e9e8a2f1d75e *man/gen.psi.tau.flat.Rd
+bfe9d1b7ae3878548fbd0d62749a3218 *man/gen.psi.tau.proj.Rd
+feab88daa95951a7173c3ac93ad72ac6 *man/getcv.Rd
+be7bab0b181716591488cd10c519eff2 *man/test.matrix.flat.Rd
+aae1785f0ac85531eab1c63cab4f193c *man/test.matrix.proj.Rd
+2743592e163087920d89c16a7868c96c *man/test.matrix.psi.Rd

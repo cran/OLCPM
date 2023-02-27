@@ -1,0 +1,5 @@
+import(LaplacesDemon)
+import(RSpectra)
+ importFrom("stats","rnorm", "runif")
+
+exportPattern("^[[:alpha:]]+")
