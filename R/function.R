@@ -331,9 +331,9 @@ moment.determine<-function(x,k.max=8,alpha=0.05,R=400){
 #' @param k a positive integer determining which eigenvalue to monitor.
 #' \eqn{k=1} for the largest eigenvalue.
 #' @param m a positive integer (\eqn{>1}) indicating the bandwidth of the
-#' rolling windom.
+#' rolling window.
 #' @param delta a number in \eqn{(0,1)} indicating the rescaling parameter for
-#' the eigenvalue. The default approach to calcualte delta is in the paper He
+#' the eigenvalue. The default approach to calculate delta is in the paper He
 #' et al. (2021).
 #' @param r a positive integer indicating the order of the transformation
 #' function \eqn{g(x)=|x|^r}. Motivated by the paper, \eqn{r} should be chosen
@@ -370,7 +370,7 @@ moment.determine<-function(x,k.max=8,alpha=0.05,R=400){
 #'
 #' @export
 #'
-gen.psi.tau.flat<-function(Y,k,m,delta,r){
+gen.psi.tau.flat<-function(Y,k,m=ceiling(max(20,(dim(Y)[3])^(r/(r+2)))),delta,r=8){
   # this outputs a (Tm*3) matrix,
   # the first column corresponde to original sample eigenvalue lambda_{k+1} (rolling),
   # the second column corresponds to rescaled p1^{-delta}*lambda_{k+1}/trace,
@@ -479,7 +479,7 @@ gen.psi.tau.flat<-function(Y,k,m,delta,r){
 #'
 #' @export
 #'
-gen.psi.tau.proj<-function(Y,k,m,delta,r,kmax){
+gen.psi.tau.proj<-function(Y,k,m=ceiling(max(20,(dim(Y)[3])^(r/(r+2)))),delta,r=8,kmax=3){
   # this outputs a (Tm*3) matrix,
   # the first column corresponde to original sample eigenvalue lambda_{k+1} (rolling),
   # the second column corresponds to rescaled p1^{-delta}*lambda_{k+1}/trace,
@@ -912,7 +912,6 @@ test.once.psi.robust<-function(m=20,psi,method="ps",eta=0.25,cv=2.3860,S=100,pr=
 #' p2=20
 #' kmax=8
 #' r=8
-#' m=p2
 #'
 #' # generate data
 #' Y=gen.data(Sample_T,p1,p2,k1,k2,tau=0.5,change=1,pp=0.5)
@@ -923,9 +922,9 @@ test.once.psi.robust<-function(m=20,psi,method="ps",eta=0.25,cv=2.3860,S=100,pr=
 #'
 #'
 #' ## test with Y, projection
-#' test.once.proj(Y,k1+1,m,epsilon,r,kmax,0,method="ps",eta=0.25)
+#' test.once.proj(Y,k1+1,kmax=8)
 #'
-#'
+#' m=p2
 #' test.once.proj(Y,k1+1,m,epsilon,r,kmax,0,method="ps",eta=0.45,cv1)
 #'
 #'
@@ -933,7 +932,7 @@ test.once.psi.robust<-function(m=20,psi,method="ps",eta=0.25,cv=2.3860,S=100,pr=
 #'
 #' @export
 #'
-test.once.proj<-function(Y,k=1,m=20,epsilon=0.05,r=8,kmax=3,decrease=0,method="ps",eta=0.25,cv=2.3860){
+test.once.proj<-function(Y,k=1,m=ceiling(max(20,(dim(Y)[3])^(r/(r+2)))),epsilon=0.05,r=8,kmax=3,decrease=0,method="ps",eta=0.25,cv=2.3860){
   T=dim(Y)[1]
   p1=dim(Y)[2]
   p2=dim(Y)[3]
@@ -1027,7 +1026,7 @@ test.once.proj<-function(Y,k=1,m=20,epsilon=0.05,r=8,kmax=3,decrease=0,method="p
 #'
 #' @export
 #'
-test.once.proj.robust<-function(Y,k=1,m=20,epsilon=0.05,r=8,kmax=3,decrease=0,method="ps",eta=0.25,cv=2.3860,S=100,pr=0.75){
+test.once.proj.robust<-function(Y,k=1,m=ceiling(max(20,(dim(Y)[3])^(r/(r+2)))),epsilon=0.05,r=8,kmax=3,decrease=0,method="ps",eta=0.25,cv=2.3860,S=100,pr=0.75){
   result=matrix(0,S,2)
   for(i in 1:S){
     temp=test.once.proj(Y,k,m,epsilon,r,kmax,decrease,method,eta,cv)
@@ -1103,7 +1102,7 @@ test.once.proj.robust<-function(Y,k=1,m=20,epsilon=0.05,r=8,kmax=3,decrease=0,me
 #'
 #' @export
 #'
-test.once.flat<-function(Y,k=1,m=20,epsilon=0.05,r=8,decrease=0,method="ps",eta=0.25,cv=2.3860){
+test.once.flat<-function(Y,k=1,m=ceiling(max(20,(dim(Y)[3])^(r/(r+2)))),epsilon=0.05,r=8,decrease=0,method="ps",eta=0.25,cv=2.3860){
   # Y: a T by p1 by p2 array
   # decrease: if True, we are testing whether factor number decreases
   T=dim(Y)[1]
@@ -1198,7 +1197,7 @@ test.once.flat<-function(Y,k=1,m=20,epsilon=0.05,r=8,decrease=0,method="ps",eta=
 #'
 #' @export
 #'
-test.once.flat.robust<-function(Y,k=1,m=20,epsilon=0.05,r=8,decrease=0,method="ps",eta=0.25,cv=2.3860,S=100,pr=0.75){
+test.once.flat.robust<-function(Y,k=1,m=ceiling(max(20,(dim(Y)[3])^(r/(r+2)))),epsilon=0.05,r=8,decrease=0,method="ps",eta=0.25,cv=2.3860,S=100,pr=0.75){
   result=matrix(0,S,2)
   for(i in 1:S){
     temp=test.once.flat(Y,k,m,epsilon,r,decrease,method,eta,cv)
@@ -1284,7 +1283,7 @@ test.once.flat.robust<-function(Y,k=1,m=20,epsilon=0.05,r=8,decrease=0,method="p
 #' test.multiple.robust(Y,k1,m,epsilon1=0.25,epsilon2=0.05,r,type="flat",method="ps",eta=0.45,cv=cv1)
 #' @export
 #'
-test.multiple.robust<-function(Y,k=1,m=20,epsilon1=0.25,epsilon2=0.05,r=8,kmax=4,type="proj",method="ps",eta=0.25,cv=2.3860,S=100,pr=0.75){
+test.multiple.robust<-function(Y,k=1,m=ceiling(max(20,(dim(Y)[3])^(r/(r+2)))),epsilon1=0.25,epsilon2=0.05,r=8,kmax=4,type="proj",method="ps",eta=0.25,cv=2.3860,S=100,pr=0.75){
   result=vector()
   T=dim(Y)[1]
   p1=dim(Y)[2]

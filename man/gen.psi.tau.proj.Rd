@@ -4,7 +4,14 @@
 \alias{gen.psi.tau.proj}
 \title{calculate eigenvalue series by projected method}
 \usage{
-gen.psi.tau.proj(Y, k, m, delta, r, kmax)
+gen.psi.tau.proj(
+  Y,
+  k,
+  m = ceiling(max(20, (dim(Y)[3])^(r/(r + 2)))),
+  delta,
+  r = 8,
+  kmax = 3
+)
 }
 \arguments{
 \item{Y}{the observed \eqn{T\times p1\times p2} array. \eqn{T} is the

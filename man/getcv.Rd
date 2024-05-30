@@ -42,7 +42,7 @@ our preserved table \emph{cv.table}, covering \eqn{\eta} in
 test statistics in He et al. (2021).
 }
 \examples{
-\donttest{
+\dontrun{
 getcv(0.05,method="ps",eta=0.25)
 getcv(0.05,method="ps",eta=0.25,simul=1)
 getcv(0.10,method="wc")

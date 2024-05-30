@@ -8,7 +8,7 @@
 test.once.flat.robust(
   Y,
   k = 1,
-  m = 20,
+  m = ceiling(max(20, (dim(Y)[3])^(r/(r + 2)))),
   epsilon = 0.05,
   r = 8,
   decrease = 0,
@@ -67,8 +67,7 @@ vote, thus more robust.
 See He et al. (2021).
 }
 \examples{
-
-\donttest{
+\dontrun{
 k1=3
 k2=3
 epsilon=0.05
@@ -95,6 +94,7 @@ test.once.flat.robust(Y,k1+1,m,epsilon,r,0,method="ps",eta=0.45,cv1)
 
 
 test.once.flat.robust(Y,k1+1,m,epsilon,r,0,method="wc",eta=0.5,cv2)
+
 }
 }
 \references{

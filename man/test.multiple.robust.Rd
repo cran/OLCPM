@@ -7,7 +7,7 @@
 test.multiple.robust(
   Y,
   k = 1,
-  m = 20,
+  m = ceiling(max(20, (dim(Y)[3])^(r/(r + 2)))),
   epsilon1 = 0.25,
   epsilon2 = 0.05,
   r = 8,
@@ -75,7 +75,7 @@ the change points for row factors. For column factors, transpose the data.
 #' See empirical study in He et al. (2021).
 }
 \examples{
-\donttest{
+\dontrun{
 k1=3
 k2=3
 Sample_T=100
@@ -102,6 +102,7 @@ test.multiple.robust(Y,k1,m,epsilon1=0.25,epsilon2=0.05,r,type="proj",kmax,metho
 test.multiple.robust(Y,k1,m,epsilon1=0.25,epsilon2=0.05,r,type="flat",method="wc",cv=cv2)
 
 test.multiple.robust(Y,k1,m,epsilon1=0.25,epsilon2=0.05,r,type="flat",method="ps",eta=0.45,cv=cv1)
+
 }
 }
 \references{

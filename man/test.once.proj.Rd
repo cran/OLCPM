@@ -8,7 +8,7 @@ version}
 test.once.proj(
   Y,
   k = 1,
-  m = 20,
+  m = ceiling(max(20, (dim(Y)[3])^(r/(r + 2)))),
   epsilon = 0.05,
   r = 8,
   kmax = 3,
@@ -71,7 +71,6 @@ p1=40
 p2=20
 kmax=8
 r=8
-m=p2
 
 # generate data
 Y=gen.data(Sample_T,p1,p2,k1,k2,tau=0.5,change=1,pp=0.5)
@@ -82,9 +81,9 @@ cv2=getcv(0.05,method="wc")
 
 
 ## test with Y, projection
-test.once.proj(Y,k1+1,m,epsilon,r,kmax,0,method="ps",eta=0.25)
+test.once.proj(Y,k1+1,kmax=8)
 
-
+m=p2
 test.once.proj(Y,k1+1,m,epsilon,r,kmax,0,method="ps",eta=0.45,cv1)
 
 

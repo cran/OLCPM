@@ -4,7 +4,13 @@
 \alias{gen.psi.tau.flat}
 \title{calculate eigenvalue series by ``flat'' method}
 \usage{
-gen.psi.tau.flat(Y, k, m, delta, r)
+gen.psi.tau.flat(
+  Y,
+  k,
+  m = ceiling(max(20, (dim(Y)[3])^(r/(r + 2)))),
+  delta,
+  r = 8
+)
 }
 \arguments{
 \item{Y}{the observed \eqn{T\times p1\times p2} array. \eqn{T} is the
@@ -15,10 +21,10 @@ respectively.}
 \eqn{k=1} for the largest eigenvalue.}
 
 \item{m}{a positive integer (\eqn{>1}) indicating the bandwidth of the
-rolling windom.}
+rolling window.}
 
 \item{delta}{a number in \eqn{(0,1)} indicating the rescaling parameter for
-the eigenvalue. The default approach to calcualte delta is in the paper He
+the eigenvalue. The default approach to calculate delta is in the paper He
 et al. (2021).}
 
 \item{r}{a positive integer indicating the order of the transformation

@@ -8,7 +8,7 @@ version}
 test.once.flat(
   Y,
   k = 1,
-  m = 20,
+  m = ceiling(max(20, (dim(Y)[3])^(r/(r + 2)))),
   epsilon = 0.05,
   r = 8,
   decrease = 0,
